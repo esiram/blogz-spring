@@ -82,7 +82,7 @@ public class AuthenticationController extends AbstractController {
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		User user = userDao.findByUsername(username);
+		User user = userDao.findByUsername(username); //I think this method needs to get made in the UserDao
 		model.addAttribute("username", username);
 		model.addAttribute("password", password);
 		boolean checkUser = username.equals(user);  //diverging a bit from Alyssa in this login method implementation
@@ -101,6 +101,7 @@ public class AuthenticationController extends AbstractController {
 			}
 		}
 
+	
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request){
