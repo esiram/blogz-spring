@@ -44,3 +44,4 @@ public class AuthenticationController extends AbstractController {
 		return "redirect:/";
 	}
 }
+//testing for github commit 11-21-16
