@@ -63,6 +63,7 @@ public class AuthenticationController extends AbstractController {
 	}
 	
 	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm() {
 		return "login";
@@ -84,7 +85,7 @@ public class AuthenticationController extends AbstractController {
 		User user = userDao.findByUsername(username);
 		model.addAttribute("username", username);
 		model.addAttribute("password", password);
-		boolean checkUser = username.equals(user);
+		boolean checkUser = username.equals(user);  //diverging a bit from Alyssa in this login method implementation
 
 		if(checkUser != true){
 			model.addAttribute("error", "Please enter a valid username.");
