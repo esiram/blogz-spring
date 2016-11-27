@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao extends CrudRepository<User, Integer> {
 
-    User findByUid(int uid);
+    public User findByUid(int uid); // public added 11/27/16 b/c of persistence video circa 27:00
     
-    List<User> findAll();
+    public List<User> findAll(); // should this be public? public added 11/27/16 b/c of persistence video circa 27:00
     
     // TODO - add method signatures as needed
     		//User findByUsername(string username);  -- I noted this on 11/22/16es
     		//List<User> findAll(); -- I noted this on 11/22/16es
-    User findByUsername(String username);  //added 11/27/16es
+    public User findByUsername(String username);  //added 11/27/16es
 }
