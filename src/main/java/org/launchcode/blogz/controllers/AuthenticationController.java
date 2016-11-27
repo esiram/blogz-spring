@@ -102,7 +102,6 @@ public class AuthenticationController extends AbstractController {
 		}
 
 	
-	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request){
         request.getSession().invalidate();
