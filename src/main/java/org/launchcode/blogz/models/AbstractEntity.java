@@ -11,8 +11,8 @@ public abstract class AbstractEntity {
 
 	private int uid;
 	
-	@Id
-    @GeneratedValue
+	@Id  //primary key
+    @GeneratedValue // hibernate will create a value for us (see persistence video circa 24:00)
     @NotNull
     @Column(name = "uid", unique = true)
 	public int getUid() {
