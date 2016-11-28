@@ -24,7 +24,28 @@ public class PostController extends AbstractController {
 	public String newPost(HttpServletRequest request, Model model) {
 		
 		// TODO - implement newPost
-		
+		String body = request.getParameter("body");
+//		date created = request.getParameter("created");
+//	    date modified = request.getParameter("modified");
+		String title = request.getParameter("title");
+		User author = request.getParameter(user-id);//how do I get the author here?
+        
+		if(title == "" || title == null){
+			model.addAttribute("error", "Title required.");
+			return "newpost";
+		}
+		else if(body == "" || body == null){
+			model.addAttribute("error", "Content required.");
+			model.addAttribute("title", title);
+			return "newpost";
+		}
+		else{//if title and body != null & != ""
+			Post newPost = new Post(title, body, author);
+			postDao.save(newPost);
+			//do I need to put something in a session here?
+			return "redirect:blog/post";		
+		}
+	
 		return "redirect:index"; // TODO - this redirect should go to the new post's page  		
 	}
 	
