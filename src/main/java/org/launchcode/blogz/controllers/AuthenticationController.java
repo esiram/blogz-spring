@@ -22,7 +22,7 @@ public class AuthenticationController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(HttpServletRequest request, Model model) {
+	public String signup(HttpServletRequest request, Model model) { //Model and model.AddAttribute() on intro to Thymeleaf video circa 14:30
 		
 		// TODO - implement signup
 		
@@ -43,7 +43,7 @@ public class AuthenticationController extends AbstractController {
 		}
 		else{
 			if(!User.isValidUsername(username)){        //if invalid username
-				model.addAttribute("username_error", "Invalid username.");
+				model.addAttribute("username_error", "Invalid username."); //model.addAttribute puts info into templates (see intro to Thymleaf video circa 15:00)
 				model.addAttribute("username", username);
 				return "signup";
 			}
@@ -76,7 +76,7 @@ public class AuthenticationController extends AbstractController {
 		
 		//1) get parameters from request object
 		//2) get user from username
-		//3) check that password is correct
+		//3) check that password is correct //HAVING ISSUES WITH LOGIN as of 11-28-16
 		//4) log user in; if so you log the user in by setting the user in the session; similar to the signup TODO
 		//Note: you might consider making a helper method to to call for the the signup and login TODs (see video ~ 23:06)
 		
@@ -97,6 +97,9 @@ public class AuthenticationController extends AbstractController {
 			return "login";
 		}
 		else{//if everything works
+			HttpSession thisSession = request.getSession();
+			this.setUserInSession(thisSession, user);
+			//setUserInSession(request.getSession(), user);
 			return "redirect:blog/newpost";
 			}
 		}
