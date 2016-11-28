@@ -9,6 +9,6 @@
 	<h1>blog users!</h1>
 
 	<!--  TODO - list all users, with links to their blog pages -->
-
+		<li th:each="user in ${users}"> <span th:text="${log.username}"></span></li>
 </body>
 </html>
