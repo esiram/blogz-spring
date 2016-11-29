@@ -85,7 +85,7 @@ public class AuthenticationController extends AbstractController {
 		User user = userDao.findByUsername(username); //I think this method needs to get made in the UserDao // YES :)
 		model.addAttribute("username", username);
 		model.addAttribute("password", password);
-		boolean checkUser = username.equals(user);  //diverging a bit from Alyssa in this login method implementation
+		boolean checkUser = username.equals(user.getUsername());  //diverging a bit from Alyssa in this login method implementation
 
 		if(checkUser != true){
 			model.addAttribute("error", "Please enter a valid username.");
@@ -99,7 +99,6 @@ public class AuthenticationController extends AbstractController {
 		else{//if everything works
 			HttpSession thisSession = request.getSession();
 			this.setUserInSession(thisSession, user);
-			//setUserInSession(request.getSession(), user);
 			return "redirect:blog/newpost";
 			}
 		}

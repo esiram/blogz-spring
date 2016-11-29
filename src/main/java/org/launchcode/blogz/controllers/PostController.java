@@ -1,8 +1,11 @@
 package org.launchcode.blogz.controllers;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.launchcode.blogz.models.Post;
 import org.launchcode.blogz.models.User;
@@ -22,13 +25,10 @@ public class PostController extends AbstractController {
 	
 	@RequestMapping(value = "/blog/newpost", method = RequestMethod.POST)
 	public String newPost(HttpServletRequest request, Model model) {
-		
-		// TODO - implement newPost
 		String body = request.getParameter("body");
-//		date created = request.getParameter("created");
-//	    date modified = request.getParameter("modified");
 		String title = request.getParameter("title");
-		User author = request.getParameter(user-id);//how do I get the author here?
+		HttpSession thisSession = request.getSession();
+		User author = this.getUserFromSession(thisSession);
         
 		if(title == "" || title == null){
 			model.addAttribute("error", "Title required.");
@@ -42,18 +42,16 @@ public class PostController extends AbstractController {
 		else{//if title and body != null & != ""
 			Post newPost = new Post(title, body, author);
 			postDao.save(newPost);
+			int postUid = newPost.getUid();
 			//do I need to put something in a session here?
-			return "redirect:blog/post";		
+			return "redirect:" + newPost.getAuthor().getUsername() + "/" + postUid;		
 		}
-	
-		return "redirect:index"; // TODO - this redirect should go to the new post's page  		
 	}
 	
 	@RequestMapping(value = "/blog/{username}/{uid}", method = RequestMethod.GET)
 	public String singlePost(@PathVariable String username, @PathVariable int uid, Model model) {
-		
-		// TODO - implement singlePost
-		
+		Post currentPost = postDao.findByUid(uid); 	
+		model.addAttribute("body", currentPost.getBody());
 		return "post";
 	}
 	
