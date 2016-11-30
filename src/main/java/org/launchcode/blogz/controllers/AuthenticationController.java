@@ -52,7 +52,7 @@ public class AuthenticationController extends AbstractController {
 				model.addAttribute("username", username);
 				return "signup";
 			}
-			else{ //if everything qualifies and verifies   Note: Alyssa has this outside of the ELSE statement on hierarchical par with STRING in line 35
+			else{ //if everything qualifies and verifies   
 				User newUser =  new User(username, password);
 				userDao.save(newUser);
 				HttpSession thisSession = request.getSession();
@@ -85,7 +85,7 @@ public class AuthenticationController extends AbstractController {
 		User user = userDao.findByUsername(username); //I think this method needs to get made in the UserDao // YES :)
 		model.addAttribute("username", username);
 		model.addAttribute("password", password);
-		boolean checkUser = username.equals(user.getUsername());  //diverging a bit from Alyssa in this login method implementation
+		boolean checkUser = username.equals(user.getUsername()); 
 
 		if(checkUser != true){
 			model.addAttribute("error", "Please enter a valid username.");

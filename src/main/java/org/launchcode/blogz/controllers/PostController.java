@@ -43,7 +43,6 @@ public class PostController extends AbstractController {
 			Post newPost = new Post(title, body, author);
 			postDao.save(newPost);
 			int postUid = newPost.getUid();
-			//do I need to put something in a session here?
 			return "redirect:" + newPost.getAuthor().getUsername() + "/" + postUid;		
 		}
 	}
@@ -57,12 +56,11 @@ public class PostController extends AbstractController {
 	
 	@RequestMapping(value = "/blog/{username}", method = RequestMethod.GET)
 	public String userPosts(@PathVariable String username, Model model) {
-		
-		// TODO - implement userPosts
-		
+		User currentUser = userDao.findByUsername(username);
+		List<Post> userPosts = currentUser.getPosts();
+		model.addAttribute("posts", userPosts);
 		return "blog";
 	}
-	
 }
 
 
