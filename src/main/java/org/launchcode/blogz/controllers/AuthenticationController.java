@@ -85,17 +85,26 @@ public class AuthenticationController extends AbstractController {
 		User user = userDao.findByUsername(username); //I think this method needs to get made in the UserDao // YES :)
 		model.addAttribute("username", username);
 		model.addAttribute("password", password);
-		boolean checkUser = username.equals(user.getUsername()); 
-
+		//boolean checkUser = username.equals(user.getUsername()); 
+		boolean checkUser = username.equals(user);
+		
 		if(checkUser != true){
-			model.addAttribute("error", "Please enter a valid username.");
+			model.addAttribute("error", "Please enter a valid username and a valid password.");
 			return "login";
 		}
+//		if(checkUser != true && user.isMatchingPassword(password) != true){
+//			model.addAttribute("error", "Please enter a valid username and a valid password.");
+//			return "login";
+//		}
 		else if(user.isMatchingPassword(password) != true){
 			model.addAttribute("error", "Please enter a valid password.");
 			model.addAttribute("username", username);
 			return "login";
 		}
+//		else if(user.isMatchingPassword(password) != true && checkUser != true){
+//			model.addAttribute("error", "Please enter a valid password and a valid username; or signup.");
+//			return "login";
+//		}
 		else{//if everything works
 			HttpSession thisSession = request.getSession();
 			this.setUserInSession(thisSession, user);
