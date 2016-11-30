@@ -49,8 +49,8 @@ public class PostController extends AbstractController {
 	
 	@RequestMapping(value = "/blog/{username}/{uid}", method = RequestMethod.GET)
 	public String singlePost(@PathVariable String username, @PathVariable int uid, Model model) {
-		Post currentPost = postDao.findByUid(uid); 	
-		model.addAttribute("body", currentPost.getBody());
+		Post currentPost = postDao.findByUid(uid);
+		model.addAttribute("post", currentPost);
 		return "post";
 	}
 	

@@ -5,8 +5,11 @@
 <body>
 
 	<div th:replace="template :: navigation"></div>
-    <p th:text="${body}"></p>
-    <li><a>Written by <span>"${user.username}"></span></a></li>
+
+    <h2><a th:text="${post.title}"></a></h2>
+		<p><a th:text="${post.body}"></a></p>
+		
+		<p><a th:text="'written by ' + ${post.author.username} + ' on ' + ${post.created} "></a></p>
     
     
 </body>
